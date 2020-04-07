@@ -8,9 +8,10 @@ app.use(express.static('public'));
 app.get('/random', function(req, res) {
     fs.readdir('./public', (err, cat) => {
         const randomCat = cat[Math.floor(Math.random() * cat.length)];
+        var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl + '/' + randomCat;
         res.json({  
             status: "OK", 
-            message: randomCat
+            message: fullUrl
         });
     });
 });
